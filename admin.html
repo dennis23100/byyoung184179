@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo 領獎核銷 Mock</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        body {
+            overflow: auto;
+            background: #f0f2f5;
+            color: #333;
+        }
+        #bg-video, #bg-video-mobile, #celebration-overlay {
+            display: none !important;
+        }
+        .admin-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 18px;
+            background: #333;
+            color: #ffd700;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+        .demo-note {
+            background: #fff7d6;
+            border: 1px solid #f0d878;
+            color: #5f4b00;
+            border-radius: 10px;
+            padding: 14px 16px;
+            margin-bottom: 18px;
+            line-height: 1.7;
+        }
+        .claim-list {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        .claim-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            padding: 15px 20px;
+            border-bottom: 1px solid #eee;
+            transition: 0.2s;
+        }
+        .claim-item:last-child { border-bottom: none; }
+        .claim-item:hover { background: #f9f9f9; }
+        .claim-item.claimed {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+        .claim-item.claimed .name-info {
+            text-decoration: line-through;
+            opacity: 0.65;
+        }
+        .accordion-header {
+            background: #e3f2fd;
+            color: #1565c0;
+            padding: 10px 20px;
+            font-weight: bold;
+            font-size: 1.1em;
+            border-left: 5px solid #1565c0;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+        }
+        .accordion-content {
+            display: none;
+        }
+        .accordion-content.show {
+            display: block;
+        }
+        .check-btn {
+            cursor: pointer;
+            padding: 8px 16px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            background: white;
+            font-weight: bold;
+        }
+        .check-btn.active {
+            background: #4caf50;
+            color: white;
+            border-color: #4caf50;
+        }
+        .name-info { font-size: 1.2em; font-weight: bold; }
+        .meta-info { font-size: 0.9em; color: #666; margin-left: 10px; }
+    </style>
+</head>
+<body>
+    <div class="admin-container">
+        <div class="header">
+            <h1 style="margin:0;">📝 Demo 領獎核銷櫃台</h1>
+            <p style="margin:5px 0 0 0; opacity:0.8;">Portfolio mock only · no production writes</p>
+        </div>
+
+        <div class="demo-note">
+            這是公開作品集用的唯讀 mock 頁面。它只讀取本瀏覽器的 demo 中獎資料，不連接正式資料庫，也不會修改任何真實領獎狀態。
+        </div>
+
+        <div id="admin-list" class="claim-list">
+            <div style="padding:20px; text-align:center; color:#888;">等待 Demo 中獎資料...</div>
+        </div>
+    </div>
+
+    <script type="module" src="admin.js"></script>
+</body>
+</html>

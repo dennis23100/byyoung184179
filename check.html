@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>中獎查詢</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+
+    <video id="bg-video-mobile" autoplay loop muted playsinline>
+        <source src="movies1.mp4" type="video/mp4">
+    </video>
+
+    <div id="celebration-overlay"></div>
+
+    <div id="trophy-btn">🏆</div>
+    <div id="trophy-menu">
+        <button onclick="showAllWinners()">所有中獎名單<br><span style="font-size:10px">(依區域排列)</span></button>
+        <button onclick="showBatchWinners()">分批中獎名單<br><span style="font-size:10px">(依抽獎順序)</span></button>
+    </div>
+
+    <div class="mobile-container">
+        <div class="check-box">
+            <h1>🎁 尾牙中獎查詢</h1>
+            <input type="text" id="query-name" placeholder="請輸入您的全名">
+            <button onclick="checkStatus()">查詢</button>
+        </div>
+        
+        <div id="check-result"></div>
+    </div>
+
+    <div id="result-area">
+        <span class="close-modal" onclick="closeResultModal()">&times;</span>
+        <h2 id="modal-title" style="color:#ffd700; margin-top:0;">中獎名單</h2>
+        <div id="result-content"></div>
+    </div>
+
+    <script type="module" src="check.js"></script>
+</body>
+</html>

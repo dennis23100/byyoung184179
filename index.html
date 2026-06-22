@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Event Lottery Demo</title>
+    <style>
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: grid;
+            place-items: center;
+            font-family: "Microsoft JhengHei", system-ui, sans-serif;
+            background: radial-gradient(circle at top, #273858, #101522 70%);
+            color: #fff;
+        }
+        main {
+            width: min(920px, calc(100% - 32px));
+            padding: 36px;
+            border-radius: 24px;
+            background: rgba(255,255,255,0.08);
+            box-shadow: 0 24px 80px rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.12);
+        }
+        h1 { margin: 0 0 12px; color: #ffd700; }
+        p { line-height: 1.8; color: rgba(255,255,255,0.82); }
+        .links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 14px;
+            margin-top: 26px;
+        }
+        a {
+            display: block;
+            padding: 18px;
+            border-radius: 16px;
+            color: #fff;
+            text-decoration: none;
+            background: rgba(255,255,255,0.12);
+            border: 1px solid rgba(255,255,255,0.14);
+            transition: transform .2s ease, background .2s ease;
+        }
+        a:hover { transform: translateY(-2px); background: rgba(255,255,255,0.18); }
+        strong { display: block; margin-bottom: 6px; color: #ffd700; }
+        small { color: rgba(255,255,255,0.7); line-height: 1.6; }
+    </style>
+</head>
+<body>
+    <main>
+        <h1>Live Event Lottery System Demo</h1>
+        <p>
+            公開作品集展示版。此版本只使用假名單與瀏覽器 localStorage，不包含正式活動資料或可寫入的正式後台。
+        </p>
+        <div class="links">
+            <a href="lottery.html?room=2026"><strong>抽獎操作 Demo</strong><small>載入假名單、抽出得獎者、產生 QR code。</small></a>
+            <a href="check.html?room=2026"><strong>中獎查詢 Demo</strong><small>參與者輸入姓名查詢 Demo 中獎狀態。</small></a>
+            <a href="hoster.html?room=2026"><strong>主持人同步看板</strong><small>顯示最新批次與歷史中獎名單。</small></a>
+            <a href="admin.html?room=2026"><strong>核銷 Mock</strong><small>唯讀展示多角色流程，不寫入資料。</small></a>
+        </div>
+    </main>
+</body>
+</html>

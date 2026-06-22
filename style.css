@@ -1,0 +1,229 @@
+/* style.css - v20 (修正版：純淨配色，移除紅色殘留) */
+body {
+    margin: 0; padding: 0;
+    font-family: 'Microsoft JhengHei', sans-serif;
+    overflow: hidden; color: white; background-color: #000;
+}
+
+/* --- 1. 背景影片 (強制填滿) --- */
+#bg-video, #bg-video-mobile {
+    position: fixed; top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    z-index: -99; object-fit: fill; 
+}
+
+/* 抽獎與特效 */
+#draw-video {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    z-index: 100; object-fit: cover; display: none; background: black;
+}
+#celebration-overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    z-index: 150; pointer-events: none;
+    background: url('movie.gif') no-repeat center center;
+    background-size: cover; opacity: 0.6; display: none;
+}
+.mobile-win-gif {
+    background: url('movies1.gif') no-repeat center center !important;
+    background-size: cover !important;
+}
+
+/* --- 2. 首頁標題 --- */
+#main-title {
+    position: fixed; top: 5%; left: 50%; transform: translateX(-50%);
+    z-index: 20; pointer-events: none;
+    background-color: rgba(0, 0, 0, 0.6); padding: 10px 40px; border-radius: 50px;
+    font-size: 3.5em; font-weight: 900; letter-spacing: 5px; text-align: center; white-space: nowrap;
+}
+#main-title span {
+    background: linear-gradient(180deg, #fff7cc 0%, #ffd700 30%, #ff8c00 70%, #ff8c00 100%);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+    filter: drop-shadow(0 0 15px rgba(255, 0, 0, 0.8));
+}
+
+/* --- 3. 面板與 Icon --- */
+.control-panel {
+    position: fixed; background: rgba(0, 0, 0, 0.6);
+    border-radius: 8px; overflow: hidden; transition: 0.3s;
+    z-index: 9999 !important;
+    width: 40px; height: 40px; top: 20px; cursor: pointer;
+    border: 1px solid rgba(255, 215, 0, 0.3);
+}
+.control-panel.active {
+    width: 280px; height: auto; padding: 15px; cursor: default; 
+    background: rgba(0, 0, 0, 0.95); border: 1px solid #ffd700;
+}
+#data-panel { left: 20px; } 
+#setting-panel { right: 20px; } 
+#music-panel-wrapper { right: 70px; }
+
+.panel-icon { font-size: 20px; text-align: center; line-height: 40px; color: #ffd700; width: 100%; height: 100%; }
+.panel-content { display: none; font-size: 14px; text-align: center; }
+.control-panel.active .panel-content { display: block; }
+.control-panel.active .panel-icon { display: none; }
+
+.file-option {
+    display: block; width: 100%; padding: 10px; margin-bottom: 8px;
+    background: rgba(255, 255, 255, 0.1); border: 1px solid #555; border-radius: 5px;
+    color: white; cursor: pointer; text-align: left; transition: 0.2s;
+}
+.file-option:hover { background: rgba(255, 215, 0, 0.2); }
+.file-option.selected { background: rgba(255, 215, 0, 0.8); color: black; font-weight: bold; border-color: #ffd700; }
+.panel-btn-group { display: flex; justify-content: space-between; margin-top: 15px; padding-top: 10px; border-top: 1px solid #555; }
+.action-btn { padding: 8px 15px; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; color: white; }
+.btn-confirm { background-color: #28a745; }
+.btn-reset { background-color: #d32f2f; }
+
+/* 音樂列表 */
+#music-list { margin-top: 10px; max-height: 180px; overflow-y: auto; scrollbar-width: thin; scrollbar-color: #ffd700 #333; }
+#music-list::-webkit-scrollbar { width: 6px; }
+#music-list::-webkit-scrollbar-track { background: #333; }
+#music-list::-webkit-scrollbar-thumb { background-color: #ffd700; border-radius: 10px; }
+.music-item {
+    display: block; width: 100%; padding: 8px; margin-bottom: 5px;
+    background: rgba(255, 255, 255, 0.1); border: none; color: white;
+    cursor: pointer; text-align: left; border-radius: 5px; transition: 0.2s;
+}
+.music-item:hover { background: #ffd700; color: black; }
+.music-item.active { background: #ff8c00; color: white; font-weight: bold; border-left: 5px solid white; }
+.music-item.loop-mode { background: rgba(0, 123, 255, 0.3); border: 1px solid #007bff; }
+.music-item.loop-mode:hover { background: #007bff; color: white; }
+.music-item.loop-mode.active { background: #007bff; border-left: 5px solid #ffd700; }
+#music-toggle-btn { margin-top: 10px; width: 40px; height: 40px; border-radius: 50%; border: 2px solid #fff; background: #d32f2f; color: white; font-size: 20px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; }
+
+/* 主按鈕 */
+.container { display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 100vh; padding-bottom: 15vh; box-sizing: border-box; position: relative; z-index: 50; }
+#draw-btn { width: auto; min-width: 200px; max-width: 80%; padding: 12px 40px; font-size: 1.3em; background: linear-gradient(45deg, #ff0000, #ff8800); border: none; border-radius: 50px; color: white; cursor: pointer; box-shadow: 0 4px 15px rgba(255, 0, 0, 0.4); letter-spacing: 2px; text-align: center; z-index: 100; }
+#draw-btn:active { transform: scale(0.95); }
+
+/* --- 4. 兌獎與核銷頁 (白色方塊) --- */
+.mobile-container { position: relative; z-index: 10; height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; }
+.check-box { background: #ffffff; padding: 30px 25px; border-radius: 10px; width: 100%; max-width: 400px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.2); position: relative; z-index: 20; color: #333; }
+.check-box h1 { margin: 0 0 20px 0; color: #333; font-size: 24px; font-weight: bold; }
+.check-box input { width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 5px; font-size: 16px; box-sizing: border-box; background: #f9f9f9; }
+.check-box button { width: 100%; padding: 12px; background: #007bff; color: white; border: none; border-radius: 5px; font-size: 18px; cursor: pointer; }
+#check-result { margin-top: 20px; width: 100%; max-width: 400px; background: rgba(0, 0, 0, 0.7); color: white; border-radius: 10px; padding: 15px; text-align: center; font-weight: bold; font-size: 1.2em; display: none; z-index: 20; box-sizing: border-box; }
+.winner-text { color: #ffd700; font-size: 1.4em; display: block; margin-bottom: 8px; }
+.loser-text { color: white; font-size: 0.9em; }
+
+/* 查詢頁摺疊標題 (維持原樣) */
+.accordion-header {
+    background: #444; color: #ffd700; cursor: pointer; padding: 15px; width: 100%;
+    box-sizing: border-box; text-align: left; border: none; outline: none;
+    font-size: 1.2em; font-weight: bold; border-radius: 5px; margin-top: 10px;
+    display: flex; justify-content: space-between; align-items: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+}
+.accordion-header:hover { background: #555; }
+.accordion-header.active { background: #0056b3; color: white; }
+.accordion-content { padding: 0 10px; display: none; overflow: hidden; background-color: rgba(255, 255, 255, 0.05); border-radius: 0 0 5px 5px; }
+.accordion-content.show { display: block; }
+.batch-time { font-size: 0.8em; color: #ccc; font-weight: normal; }
+.accordion-header.active .batch-time { color: #eee; }
+.list-item-row { display: flex; justify-content: space-between; align-items: center; padding: 10px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+.list-item-row:last-child { border-bottom: none; }
+.zone-tag { background: #e0e0e0; color: #333; padding: 2px 6px; border-radius: 4px; font-size: 0.9em; margin-left: 10px; font-weight: bold; }
+
+/* --- 5. 主持人頁面專用樣式 (Host Only) - 關鍵修正區 --- */
+
+/* 基本標題樣式 (重置紅色漸層) */
+.prize-section-title {
+    text-align: left;
+    padding: 15px 20px;
+    margin: 25px 0 0 0;
+    font-size: 1.4em;
+    font-weight: bold;
+    border-radius: 8px 8px 0 0;
+    cursor: pointer;
+    user-select: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: 0.2s;
+    
+    /* 這裡把原本的紅色漸層強制移除 */
+    background: none !important;
+    background-image: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+}
+
+/* 箭頭 */
+.prize-section-title::after {
+    content: '▼';
+    font-size: 0.8em;
+    transition: transform 0.3s;
+}
+.prize-section-title:not(.expanded)::after {
+    transform: rotate(-90deg);
+}
+
+/* ★★★ 新資料：淡藍色背景，白色文字 ★★★ */
+.prize-section-title.latest-batch {
+    background-color: #64b5f6 !important; /* 天藍色 */
+    color: #ffffff !important;            /* 純白字 */
+}
+.prize-section-title.latest-batch:hover {
+    background-color: #42a5f5 !important;
+}
+
+/* ★★★ 舊資料：淡灰色背景，白色文字 ★★★ */
+.prize-section-title.old-batch {
+    background-color: #bdc3c7 !important; /* 淡灰色 */
+    color: #ffffff !important;            /* 純白字 */
+}
+.prize-section-title.old-batch:hover {
+    background-color: #95a5a6 !important;
+}
+
+/* 內容區塊：白底黑字 */
+.prize-content-wrapper {
+    display: none;
+    background: #ffffff; /* 純白 */
+    border: 1px solid #ddd; /* 灰色邊框 */
+    border-top: none;
+    border-radius: 0 0 8px 8px;
+    padding: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+.prize-content-wrapper.show {
+    display: block;
+    animation: slideDown 0.3s ease-out;
+}
+
+/* 主持人頁面的名單列表 (黑字) */
+.zone-group { 
+    background: #fff; 
+    margin-bottom: 0; 
+    padding: 12px; 
+    border-bottom: 1px solid #eee; 
+    border-radius: 0; 
+    text-align: left; 
+    display: flex; 
+    align-items: center; 
+    color: #333; /* 文字黑色 */
+}
+.zone-group:last-child { border-bottom: none; }
+.zone-title { 
+    color: #555; 
+    font-weight: bold; 
+    min-width: 120px; 
+    background: #f5f5f5; 
+    padding: 2px 8px; 
+    border-radius: 4px; 
+    text-align: center; 
+    margin-right: 15px; 
+    font-size: 0.9em; 
+}
+.zone-names { font-weight: bold; color: #000; } /* 人名黑色 */
+
+/* QR Code & 其他 */
+#trophy-btn { position: fixed; top: 20px; right: 20px; width: 50px; height: 50px; background: rgba(0, 0, 0, 0.8); border-radius: 50%; color: #ffd700; font-size: 28px; text-align: center; line-height: 50px; cursor: pointer; z-index: 100; border: 2px solid #ffd700; box-shadow: 0 0 10px rgba(255, 215, 0, 0.5); }
+#trophy-menu { display: none; position: fixed; top: 80px; right: 20px; background: rgba(0, 0, 0, 0.95); border: 1px solid #ffd700; border-radius: 10px; padding: 10px; z-index: 99; width: 160px; }
+#trophy-menu button { background: transparent; border: 1px solid #555; color: white; margin-bottom: 5px; font-size: 14px; padding: 10px; }
+#result-area { display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 85%; max-width: 500px; max-height: 70vh; overflow-y: auto; background: rgba(0, 0, 0, 0.95); border: 2px solid #ffd700; border-radius: 15px; padding: 30px 20px; z-index: 200; box-shadow: 0 0 50px rgba(255, 215, 0, 0.3); text-align: center; }
+.close-modal { position: absolute; top: 10px; right: 15px; font-size: 28px; color: #aaa; cursor: pointer; z-index: 201; }
+.batch-separator { margin: 25px 0 10px 0; text-align: center; color: #00e5ff; font-size: 1.4em; font-weight: bold; border-bottom: 1px dashed #555; padding-bottom: 5px; text-shadow: 0 0 5px rgba(0, 229, 255, 0.5); }
+#qr-container { position: fixed; bottom: 15px; left: 15px; background: white; padding: 5px; border-radius: 5px; text-align: center; z-index: 60; }
+#qrcode img { display: block; margin: 0 auto; }

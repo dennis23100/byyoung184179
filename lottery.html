@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>年度盛典抽獎 Demo</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+</head>
+<body>
+    <audio id="bg-music"></audio>
+
+    <video id="bg-video" autoplay loop muted playsinline>
+        <source src="bg.mp4" type="video/mp4">
+    </video>
+
+    <video id="draw-video">
+        <source src="movie.mp4" type="video/mp4">
+    </video>
+
+    <div id="celebration-overlay"></div>
+
+    <div id="data-panel" class="control-panel">
+        <div class="panel-icon">📂</div>
+        <div class="panel-content">
+            <h3 style="margin-top:0; color:#ffd700;">Demo 名單選擇</h3>
+            <p style="font-size:12px; color:#aaa; margin-bottom:10px;">目前房間: <span id="current-room-display">...</span></p>
+            <p style="font-size:12px; color:#aaa; margin-bottom:10px;">公開展示版僅使用假名單，不連接正式資料庫。</p>
+            <p style="margin:5px 0;">總人數: <span id="total-count">0</span> / 剩餘: <span id="remain-count">0</span></p>
+
+            <div id="file-selector-container">
+                <div class="file-option selected" data-group="demo_a">Demo Group A</div>
+                <div class="file-option" data-group="demo_b">Demo Group B</div>
+                <div class="file-option" data-group="demo_c">Demo Group C</div>
+            </div>
+
+            <div class="panel-btn-group">
+                <button id="btn-confirm-data" class="action-btn btn-confirm">載入 Demo 名單</button>
+                <button onclick="resetWinners()" class="action-btn btn-reset">重置 Demo 結果</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="music-panel-wrapper" class="control-panel">
+        <div class="panel-icon">🎵</div>
+        <div class="panel-content">
+            <h3 style="color:#ffd700; margin-top:0;">音樂點播</h3>
+            <div id="music-list"></div>
+            <div style="margin-top:10px; border-top:1px solid #555; padding-top:10px;">
+                <button id="music-toggle-btn" title="靜音/播放">🔊</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="setting-panel" class="control-panel">
+        <div class="panel-icon">⚙️</div>
+        <div class="panel-content">
+            <h3>抽獎設定</h3>
+            <label>獎項名稱：</label>
+            <input type="text" id="prize-name" value="Demo 特獎">
+            <label>抽出人數：</label>
+            <input type="number" id="draw-count" value="1" min="1">
+            <button onclick="closeSettings()">確認</button>
+        </div>
+    </div>
+
+    <div class="container">
+        <div style="margin-bottom:14px;padding:10px 14px;border-radius:999px;background:rgba(0,0,0,0.45);color:#ffd700;font-size:14px;display:inline-block;">
+            Portfolio Demo Mode · Fake data only
+        </div>
+        <button id="draw-btn">開始抽獎</button>
+        <div id="result-area">
+            <span class="close-modal" onclick="closeResultModal()">&times;</span>
+            <div id="result-content"></div>
+        </div>
+    </div>
+
+    <div id="qr-container">
+        <div id="qrcode"></div>
+    </div>
+
+    <script type="module" src="script.js"></script>
+</body>
+</html>
